@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Redactor List
+    <h1>
+      Redactor List
+      <a style="float: right" href="{% url 'newspaper:redactor-create' %}">+</a>
     </h1>
 
     {% if redactor_list %}

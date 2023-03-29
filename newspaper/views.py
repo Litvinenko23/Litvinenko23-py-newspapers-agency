@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from newspaper.forms import RedactorCreationForm, NewspaperForm
 from newspaper.models import Redactor, Newspaper, Topic
 
 
@@ -66,13 +67,13 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
-    fields = "__all__"
+    form_class = NewspaperForm
     success_url = reverse_lazy("newspaper:newspaper-list")
 
 
 class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
-    fields = "__all__"
+    form_class = NewspaperForm
     success_url = reverse_lazy("newspaper:newspaper-list")
 
 
@@ -80,3 +81,31 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     success_url = reverse_lazy("newspaper:newspaper-list")
     template_name = "newspaper/newspaper_confirm_delete.html"
+
+
+class RedactorListView(LoginRequiredMixin, generic.ListView):
+    model = Redactor
+    paginate_by = 5
+
+
+class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Redactor
+    queryset = Redactor.objects.prefetch_related("newspapers__topic")
+
+
+class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Redactor
+    form_class = RedactorCreationForm
+    # success_url = reverse_lazy("newspaper:redactor-list")
+
+
+class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Redactor
+    fields = "__all__"
+    success_url = reverse_lazy("redactor:redactor-list")
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Redactor
+    success_url = reverse_lazy("redactor:redactor-list")
+    template_name = "newspaper/redactor_confirm_delete.html"

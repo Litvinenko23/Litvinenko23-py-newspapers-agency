@@ -6,11 +6,36 @@
   <a style="float: right" href="{% url 'newspaper:topic-create' %}">+</a>
   </h1>
   {% if topic_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
       {% for topic in topic_list %}
-        <li>{{ topic.name }}</li>
+        <tr>
+          <td>
+              {{ topic.id }}
+          </td>
+          <td>
+              {{ topic.name }}
+          </td>
+          <td>
+              <a href="{% url 'newspaper:topic-update' pk=topic.id %}">
+                Update
+              </a>
+            </td>
+            <td>
+              <a style="color: red"
+                href="{% url 'newspaper:topic-delete' pk=topic.id %}">
+                Delete
+              </a>
+            </td>
+        </tr>
       {% endfor %}
-    </ul>
+    </table>
   {% else %}
     <p>There are no topics</p>
   {% endif %}

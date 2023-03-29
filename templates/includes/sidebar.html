@@ -7,7 +7,7 @@
   {% endif %}
 
   <li><a href="{% url 'newspaper:index' %}">Home</a></li>
-  <li><a href="#">All redactors</a></li>
+  <li><a href="{% url 'newspaper:redactor-list' %}">All redactors</a></li>
   <li><a href="{% url 'newspaper:newspaper-list' %}">All newspapers</a></li>
   <li><a href="{% url 'newspaper:topic-list' %}">All topics</a></li>
 </ul>

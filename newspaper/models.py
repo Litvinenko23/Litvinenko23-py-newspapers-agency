@@ -25,7 +25,7 @@ class Redactor(AbstractUser):
         return f"{self.username} ({self.first_name} {self.last_name})"
 
     def get_absolute_url(self):
-        return reverse("taxi:redactor-detail", kwargs={"pk": self.pk})
+        return reverse("newspaper:redactor-detail", kwargs={"pk": self.pk})
 
 
 class Newspaper(models.Model):
