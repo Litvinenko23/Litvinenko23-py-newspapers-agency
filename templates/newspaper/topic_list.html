@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Topic List</h1>
+  <h1>
+    Topic List
+  <a style="float: right" href="{% url 'newspaper:topic-create' %}">+</a>
+  </h1>
   {% if topic_list %}
     <ul>
       {% for topic in topic_list %}
