@@ -17,6 +17,7 @@ class Redactor(AbstractUser):
     years_of_experience = models.IntegerField(default=0)
 
     class Meta:
+        ordering = ["username"]
         verbose_name = "redactor"
         verbose_name_plural = "redactors"
 
@@ -33,6 +34,9 @@ class Newspaper(models.Model):
     published_date = models.DateTimeField(auto_now_add=True)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     publishers = models.ManyToManyField(Redactor, related_name="newspapers")
+
+    class Meta:
+        ordering = ["title"]
 
     def __str__(self):
         return self.title

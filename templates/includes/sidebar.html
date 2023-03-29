@@ -1,9 +1,13 @@
-<ul>
+<ul class="sidebar-nav">
+  {% if user.is_authenticated %}
+    <li>User: {{ user.username }}</li>
+    <li class="list-group-item"><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+  {% else %}
+    <li class="list-group-item"><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+  {% endif %}
+
   <li><a href="{% url 'newspaper:index' %}">Home</a></li>
-  <li><a href="#">All drivers</a></li>
-  <li><a href="#">All cars</a></li>
-  <li><a href="#">All manufacturers</a></li>
+  <li><a href="#">All redactors</a></li>
+  <li><a href="{% url 'newspaper:newspaper-list' %}">All newspapers</a></li>
+  <li><a href="{% url 'newspaper:topic-list' %}">All topics</a></li>
 </ul>
-
-
-
