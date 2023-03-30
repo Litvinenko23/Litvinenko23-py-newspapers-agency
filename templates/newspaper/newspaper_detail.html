@@ -2,8 +2,14 @@
 
 {% block content %}
   <h1>
-    Title: {{ newspaper.title }}
-    <a style="float: right" href="{% url 'newspaper:newspaper-update' pk=newspaper.id %}">Edit</a>
+    {{ newspaper.title }}
+    <a href="{% url 'newspaper:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'newspaper:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
   </h1>
   <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
 

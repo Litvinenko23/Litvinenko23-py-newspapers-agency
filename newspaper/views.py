@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
 from newspaper.forms import RedactorCreationForm, NewspaperForm, NewspaperSearchForm, RedactorSearchForm, \
-    TopicSearchForm
+    TopicSearchForm, RedactorUpdateForm
 from newspaper.models import Redactor, Newspaper, Topic
 
 
@@ -167,11 +168,12 @@ class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
-    fields = "__all__"
-    success_url = reverse_lazy("redactor:redactor-list")
+    form_class = RedactorUpdateForm
+    # fields = "__all__"
+    success_url = reverse_lazy("newspaper:redactor-list")
 
 
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Redactor
-    success_url = reverse_lazy("redactor:redactor-list")
+    success_url = reverse_lazy("newspaper:redactor-list")
     template_name = "newspaper/redactor_confirm_delete.html"

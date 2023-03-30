@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 
 from newspaper.models import Redactor, Newspaper
@@ -49,3 +49,9 @@ class RedactorSearchForm(forms.Form):
         label="",
         widget=forms.TextInput(attrs={"placeholder": "Search by username..."})
     )
+
+
+class RedactorUpdateForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = Redactor
+        fields = ["username", "first_name", "last_name"]
