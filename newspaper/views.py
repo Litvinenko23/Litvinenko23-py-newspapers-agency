@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from newspaper.forms import RedactorCreationForm, NewspaperForm
+from newspaper.forms import RedactorCreationForm, NewspaperForm, NewspaperSearchForm
 from newspaper.models import Redactor, Newspaper, Topic
 
 
@@ -59,6 +59,27 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
     queryset = Newspaper.objects.select_related("topic")
     paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(NewspaperListView, self).get_context_data(**kwargs)
+
+        title = self.request.GET.get("title", "")
+
+        context["search_form"] = NewspaperSearchForm(initial={
+            "title": title
+        })
+
+        return context
+
+    def get_queryset(self):
+        form = NewspaperSearchForm(self.request.GET)
+
+        if form.is_valid():
+            return self.queryset.filter(
+                title__icontains=form.cleaned_data["title"]
+            )
+
+        return self.queryset
 
 
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
