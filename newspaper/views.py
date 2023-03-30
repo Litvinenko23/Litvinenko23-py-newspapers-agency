@@ -34,7 +34,6 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
     template_name = "newspaper/topic_list.html"
     context_object_name = "topic_list"
-    queryset = Topic.objects.order_by("name")
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -49,14 +48,15 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
+        queryset = Topic.objects.order_by("name")
         form = TopicSearchForm(self.request.GET)
 
         if form.is_valid():
-            return self.queryset.filter(
+            return queryset.filter(
                 name__icontains=form.cleaned_data["name"]
             )
 
-        return self.queryset
+        return queryset
 
 
 class TopicCreateView(LoginRequiredMixin, generic.CreateView):
@@ -79,7 +79,6 @@ class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
-    queryset = Newspaper.objects.select_related("topic")
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -94,14 +93,16 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
+        queryset = Newspaper.objects.select_related("topic")
+
         form = NewspaperSearchForm(self.request.GET)
 
         if form.is_valid():
-            return self.queryset.filter(
+            return queryset.filter(
                 title__icontains=form.cleaned_data["title"]
             )
 
-        return self.queryset
+        return queryset
 
 
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
@@ -129,7 +130,6 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
 class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
     paginate_by = 5
-    queryset = Redactor.objects.prefetch_related("newspapers__topic")
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(RedactorListView, self).get_context_data(**kwargs)
@@ -143,14 +143,15 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
+        queryset = Redactor.objects.prefetch_related("newspapers__topic")
         form = RedactorSearchForm(self.request.GET)
 
         if form.is_valid():
-            return self.queryset.filter(
+            return queryset.filter(
                 username__icontains=form.cleaned_data["username"]
             )
 
-        return self.queryset
+        return queryset
 
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
