@@ -1,13 +1,36 @@
-<ul class="sidebar-nav">
-  {% if user.is_authenticated %}
-    <li>User: {{ user.username }}</li>
-    <li class="list-group-item"><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-  {% else %}
-    <li class="list-group-item"><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
-  {% endif %}
+ <!-- [ navigation menu ] start -->
+  <nav class="pcoded-navbar menupos-fixed menu-light ">
+    <div
+      class="navbar-wrapper  ">
+      <div class="navbar-content scroll-div "
+        >
+        <ul class="nav pcoded-inner-navbar ">
+          <li class="nav-item">
+            <a href="/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span
+                class="pcoded-mtext">Home Page</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'newspaper:topic-list' %}" class="nav-link "><span class="pcoded-micon"><i
+                  class="feather icon-tag"></i></span><span class="pcoded-mtext">Topics</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'newspaper:redactor-list' %}" class="nav-link "><span class="pcoded-micon"><i
+                  class="feather icon-users"></i></span><span class="pcoded-mtext">Redactors</span></a>
+          </li>
+          <li class="nav-item"><a href="{% url 'newspaper:newspaper-list' %}" class="nav-link "><span class="pcoded-micon"><i
+                  class="feather icon-file-text"></i></span><span class="pcoded-mtext">Newspapers</span></a></li>
+        </ul>
 
-  <li><a href="{% url 'newspaper:index' %}">Home</a></li>
-  <li><a href="{% url 'newspaper:redactor-list' %}">All redactors</a></li>
-  <li><a href="{% url 'newspaper:newspaper-list' %}">All newspapers</a></li>
-  <li><a href="{% url 'newspaper:topic-list' %}">All topics</a></li>
-</ul>
+        <div class="card text-center">
+          <div class="card-body px-3">
+            <i class="feather icon-github f-40"></i>
+            <h6 class="mt-3">Check repo</h6>
+            <a href="https://github.com/Litvinenko23/Litvinenko23-py-newspapers-agency" target="_blank"
+              class="btn btn-primary btn-sm text-white m-0">Github Link</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+  <!-- [ navigation menu ] end -->

@@ -163,13 +163,11 @@ class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
     form_class = RedactorCreationForm
-    # success_url = reverse_lazy("newspaper:redactor-list")
 
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
     form_class = RedactorUpdateForm
-    # fields = "__all__"
     success_url = reverse_lazy("newspaper:redactor-list")
 
 

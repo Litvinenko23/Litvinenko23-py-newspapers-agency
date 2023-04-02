@@ -1,13 +1,25 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} Topic</h1>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ object|yesno:"Update,Create" }} Topic</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" novalidate>
+          {% csrf_token %}
+          {{ form|crispy }}
 
-  <form action="" method="post" novalidate>
-    {% csrf_token %}
-    {{ form|crispy }}
-
-    <input class="btn btn-primary" type="submit" value="Submit">
-  </form>
+          <div class="d-flex justify-content-end">
+            <input class="btn btn-primary" type="submit" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}

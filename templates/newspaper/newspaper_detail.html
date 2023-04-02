@@ -1,31 +1,40 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
 
 {% block content %}
-  <h1>
-    {{ newspaper.title }}
-    <a href="{% url 'newspaper:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
 
-    <a href="{% url 'newspaper:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
-  </h1>
-  <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
-
-  <div class="ml-3">
-    <h3>Publishers</h3>
-
-    {% for publisher in newspaper.publishers.all %}
-      <hr>
-      <p class="text-muted"><strong>Id:</strong> {{ publisher.id }}</p>
-      <p>
-        <strong>Full name:</strong>
-        {{ publisher.first_name }} {{ publisher.last_name }}
-      </p>
-    {% empty %}
-      <p>No drivers!</p>
-    {% endfor %}
-    {{ newspaper.content }}
+<section class="pcoded-main-container">
+  <div class="pcoded-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>{{ newspaper.title }}</h5>
+            <div class="float-right">
+              <a href="{% url 'newspaper:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">Update</a>
+              <a href="{% url 'newspaper:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">Delete</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+                <p><strong>Publishers:</strong></p>
+                <ul>
+                  {% for publisher in newspaper.publishers.all %}
+                    <li>{{ publisher.first_name }} {{ publisher.last_name }}</li>
+                  {% empty %}
+                    <li>No publishers found</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <p>{{ newspaper.content }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 {% endblock %}
