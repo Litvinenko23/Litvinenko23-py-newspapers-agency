@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Topic List</h5>
+{#                        <div class="simpson">#}
+                        <form action="" method="get" class="form-inline">
+                            {{ search_form|crispy }}
+                              <input class="btn btn-secondary" type="submit" value="🔎" id="search-form">
+                          </form>
+                        <a style="float: right" href="{% url 'newspaper:topic-create' %}" class="btn btn-primary link-to-page">Create</a>
+{#                        </div>#}
+                    </div>
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if topic_list %}
+                                    {% for topic in topic_list %}
+                                    <tr>
+                                        <td>{{ topic.id }}</td>
+                                        <td>{{ topic.name }}</td>
+                                        <td>
+                                          <a class="waves-effect waves-light btn-small blue" href="{% url 'newspaper:topic-update' pk=topic.id %}">
+                                            Update
+                                          </a>
+                                        </td>
+                                        <td>
+                                          <a class="waves-effect waves-light btn-small red" href="{% url 'newspaper:topic-delete' pk=topic.id %}">
+                                            Delete
+                                          </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="4">There are no topics</td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                                {% block pagination %}
+                                    {% include 'includes/pagination.html' %}
+                                {% endblock %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

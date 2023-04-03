@@ -1,0 +1,61 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+{% block content %}
+<section class="pcoded-main-container">
+  <div class="pcoded-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>Redactor List</h5>
+              <form action="" method="get" class="form-inline">
+                  {{ search_form|crispy }}
+                  <input class="btn btn-secondary" type="submit" value="🔎">
+              </form>
+            <a style="float: right" href="{% url 'newspaper:redactor-create' %}" class="btn btn-primary link-to-page">Create</a>
+          </div>
+          <div class="card-body table-border-style">
+            <div class="table-responsive">
+            <div class="table-responsive w-100">
+              <table class="table table-width-100">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Years of experience</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if redactor_list %}
+                  {% for redactor in redactor_list %}
+                  <tr>
+                    <td>{{ redactor.id }}</td>
+                    <td><a href="{{ redactor.get_absolute_url }}">{{ redactor.username }} {% if user == redactor %} (Me){% endif %}</a></td>
+                    <td>{{ redactor.first_name }}</td>
+                    <td>{{ redactor.last_name }}</td>
+                    <td>{{ redactor.years_of_experience }}</td>
+                  </tr>
+                  {% endfor %}
+                  {% else %}
+                  <tr>
+                    <td colspan="5" class="text-center">There are no redactors in the agency.</td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+                {% block pagination %}
+                    {% include 'includes/pagination.html' %}
+                {% endblock %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

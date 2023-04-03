@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h1>Delete topic?</h1>
+        <p>Are you sure you want to delete the topic "{{ object.name }}"?</p>
+
+        <form id="manufacturer-delete-form" action="" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Yes" class="btn btn-danger">
+          <a href="{% url 'newspaper:topic-list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
