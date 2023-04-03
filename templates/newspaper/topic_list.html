@@ -9,13 +9,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>Topic List</h5>
-{#                        <div class="simpson">#}
                         <form action="" method="get" class="form-inline">
                             {{ search_form|crispy }}
                               <input class="btn btn-secondary" type="submit" value="🔎" id="search-form">
                           </form>
                         <a style="float: right" href="{% url 'newspaper:topic-create' %}" class="btn btn-primary link-to-page">Create</a>
-{#                        </div>#}
                     </div>
                     <div class="card-body table-border-style">
                         <div class="table-responsive">
