@@ -2463,6 +2463,12 @@ progress {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.modal-dialog.modal-dialog-centered {
+  margin-top: 100px;
+}
+
+
+
 @media (prefers-reduced-motion: reduce) {
     .form-control {
         transition: none;
