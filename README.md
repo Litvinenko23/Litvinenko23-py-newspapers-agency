@@ -10,14 +10,20 @@ Django project for newspapers agency management
 
 Python3 must be already installed
 
-```shell
-git clone https://github.com/Litvinenko23/newspapers-agency
+```
+git clone https://github.com/Litvinenko23/newspapers-agency.git
 cd Litvinenko23-py-newspapers-agency
 python3 -m venv venv
-source venv/bin/activate
+venv\Scripts\activate (on Windows)
+source venv/bin/activate (on macOS)
 pip install -r requirements.txt
+python manage.py migrate
 python manage.py runserver
 ```
+
+### User's credentials
+- Username: admin.user
+- Password: 1qazcde3
 
 
 ## Features
@@ -25,3 +31,4 @@ python manage.py runserver
 * Managing newspapers redactors & topics directly from website
 * Powerful admin-panel for advanced managing
 
+### Pictures
