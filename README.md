@@ -31,4 +31,5 @@ python manage.py runserver
 * Managing newspapers redactors & topics directly from website
 * Powerful admin-panel for advanced managing
 
-### Pictures
+### Images
+![image](https://github.com/Litvinenko23/Litvinenko23-py-newspapers-agency/assets/64659599/701c94e8-c185-405d-aa79-328b8633a29a)
